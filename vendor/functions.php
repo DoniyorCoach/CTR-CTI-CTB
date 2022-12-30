@@ -1,13 +1,24 @@
 <?php
 
-function Counter ($path, $filename)
+function Counter($path, $prop)
 {
     $dataArray = file($path);
-    $dataArray[$filename - 1] = (intval($dataArray[$filename - 1]) + 1) . "\n";
+    $dataArray[$prop - 1] = (intval($dataArray[$prop - 1]) + 1) . "\n";
     file_put_contents($path, $dataArray);
 }
 
-function ClearRequest ($path) {
+function ClearRequest($path)
+{
     header("Location: $path");
-    exit();
+}
+
+function GetUniqueNumber($min, $max, $currentNumber)
+{
+    while (true) {
+        $unique = rand($min, $max);
+        if ($unique !== intval($currentNumber)) {
+            break;
+        }
+    }
+    return $unique;
 }

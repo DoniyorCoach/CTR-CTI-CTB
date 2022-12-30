@@ -10,17 +10,14 @@
 </head>
 
 <body>
-    <a href="./pages/1.php">First Site</a>
-    <a href="./pages/2.php">Second Site</a>
-    <a href="./pages/3.php">Third Site</a>
-    <a href="./pages/4.php">Fourth Site</a>
-    <a href="./pages/5.php">Fifth Site</a>
-    <a href="./stats/statistics.php" class="statistics">Statistics</a>
-    <?php
-
-
-
-    ?>
+    <div class="container">
+        <a href="./pages/1.php" class="redirectLabel">С чего начать ???</a>
+        <a href="./pages/2.php" class="redirectLabel">Интернет стратегии</a>
+        <a href="./pages/3.php" class="redirectLabel">Виртуальные торговые площадки</a>
+        <a href="./pages/4.php" class="redirectLabel">Банковские услуги</a>
+        <a href="./pages/5.php" class="redirectLabel">Интернет страхование</a>
+        <a href="./stats/statistics.php" class="redirectLabel">Статистика (CTR - CTI - CTB)</a>
+    </div>
 </body>
 
 </html>

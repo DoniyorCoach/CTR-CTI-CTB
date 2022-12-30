@@ -10,58 +10,46 @@
 </head>
 
 <body>
-    <a href="/index.php" class="back">⬅ Назад</a>
-    <p>
-        С чего начать создание системы Электронной Коммерции
+    <div class="container">
+        <a href="/" class="back">⬅ Назад</a>
+        <p class="info">
+            "С чего начать создание системы Электронной Коммерции или Интернет-магазина?", - спрашиваете вы. Но сначала давайте уточним, какое из звеньев торговой цепочки занимает ваша компания? Какую часть своих бизнес-процессов она хотела бы перевести в электронную форму? И, наконец, какие именно сферы вашей деятельности можно оптимизировать, используя Интернет-технологии?
+        </p>
+        <form>
+            <input type="submit" name="like" class="likeBtn" value="🔥">
+        </form>
 
-        Введение
+        <?php
+        include_once '../vendor/functions.php';
 
-        "С чего начать создание системы Электронной Коммерции или Интернет-магазина?", - спрашиваете вы. Но сначала давайте уточним, какое из звеньев торговой цепочки занимает ваша компания? Какую часть своих бизнес-процессов она хотела бы перевести в электронную форму? И, наконец, какие именно сферы вашей деятельности можно оптимизировать, используя Интернет-технологии?
+        $path = basename(__FILE__);
+        $fileNumber = str_replace('.php', '', $path);
 
-        Что такое система электронной коммерции?
+        $randomNumber = GetUniqueNumber(1, 5, $fileNumber);
 
-        Электронная Коммерция - это любая форма бизнес-процесса, в котором взаимодействие между субъектами происходит электронным способом (с использованием Интернет-технологий).
-    </p>
-    <form>
-        <input type="submit" name="order" value="заказать">
-    </form>
+        //visits
+        Counter('../stats/visits.txt', $fileNumber);
 
-    <?php
-    include_once '../vendor/functions.php';
-    $randomNumber;
+        //shows 
+        Counter('../stats/shows.txt', $randomNumber);
 
-    $path = basename(__FILE__);
-    $filename = str_replace('.php', '', $path);
-
-    while (true) {
-        $randomNumber = rand(1, 5);
-        if ($randomNumber !== intval($filename)) {
-            break;
+        //clicks
+        if (!empty($_GET['fromAds'])) {
+            Counter('../stats/clicks.txt', $fileNumber);
+            ClearRequest("http://banner/pages/$path");
         }
-    }
 
-    //visits
-    Counter('../stats/visits.txt', $filename);
+        //likes
+        if (!empty($_GET['like'])) {
+            Counter('../stats/likes.txt', $fileNumber);
+            ClearRequest("http://banner/pages/$path");
+        }
 
-    //shows 
-    Counter('../stats/shows.txt', $randomNumber);
-
-    //clicks
-    if (!empty($_GET['fromAds'])) {
-        Counter('../stats/clicks.txt', $filename);
-        ClearRequest("http://lab8/pages/$path");
-    }
-
-    //orders
-    if (!empty($_GET['order'])) {
-        Counter('../stats/orders.txt', $filename);
-        ClearRequest("http://lab8/pages/$path");
-    }
-
-    ?>
-    <a href="<?= './' . $randomNumber . '.php/?fromAds=true' ?>">
-        <img src="<?= '/gifs/' . $randomNumber . '.gif' ?>" alt="ads">
-    </a>
+        ?>
+        <a href="<?= './' . $randomNumber . '.php/?fromAds=true' ?>" class="banner">
+            <img src="<?= '/gifs/' . $randomNumber . '.gif' ?>" alt="ads">
+        </a>
+    </div>
 </body>
 
 </html>
